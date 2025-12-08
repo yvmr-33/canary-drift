@@ -112,5 +112,5 @@ spec:
           #     (sum(rate(istio_requests_total{destination_service_name="{{args.stable-service}}"}[2m]))>0)
           #   )
           # )
-          sum(increase(istio_requests_total[1h])) 
+          sum(rate(istio_requests_total{destination_service_name=~"{{args.stable-service}}"}[2m])) OR vector(0)
           # vector(-0.5)
