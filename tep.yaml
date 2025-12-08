@@ -15,5 +15,5 @@ spec:
       prometheus:
         address: http://prometheus.istio-system.svc.cluster.local:9090 
         query: |
-          sum(rate(istio_requests_total{destination_service=~"{{args.stable-service}}"}[1m]))
+          sum(rate(istio_requests_total{destination_service=~"{{args.stable-service}}"}[30m]))
           # vector(-0.5)
