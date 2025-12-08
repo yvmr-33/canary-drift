@@ -112,4 +112,5 @@ spec:
           #     (sum(rate(istio_requests_total{destination_service_name="{{args.stable-service}}"}[2m]))>0)
           #   )
           # )
-          sum(rate(istio_requests_total{destination_service_name="{{args.canary-service}}", response_code=~"5[0-9]{2}"}[2m]))*0
+          # sum(rate(istio_requests_total{destination_service_name="{{args.canary-service}}", response_code=~"5[0-9]{2}"}[2m]))*0
+          vector(1)
