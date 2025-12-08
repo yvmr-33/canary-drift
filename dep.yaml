@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   name: myservice
 spec:
-  replicas: 16 # Total replicas (was 15 + 1)
+  replicas: 10 # Total replicas (was 15 + 1)
   selector:
     matchLabels:
       app: myservice
@@ -11,11 +11,10 @@ spec:
     metadata:
       labels:
         app: myservice
-        # version: v1 # The version label is no longer necessary here, Rollouts manages stability
     spec:
       containers:
       - name: myservice
-        image: docker.io/yvmr/nap1:latest # This is your initial (v1) image
+        image: docker.io/yvmr/v1:latest 
         ports:
         - containerPort: 3000
         env:
@@ -24,6 +23,7 @@ spec:
   # Define the Canary strategy
   strategy:
     canary:
+      
       # References the services created above
       stableService: myservice-stable
       canaryService: myservice-canary
@@ -34,12 +34,19 @@ spec:
             name: myservice-vs
             routes:
             - http
-      # Define the steps for the progressive rollout
+      analysis:
+          templates:
+          - templateName: error-rate-check 
+          args:
+          - name: stable-service
+            value: my-app-stable-svc.default.svc.cluster.local
+          - name: canary-service
+            value: my-app-canary-svc.default.svc.cluster.local
       steps:
-      - setWeight: 10 # Send 10% of traffic to the new (canary) version
-      - pause: {  } # Wait 60 seconds for metrics checks (or remove for manual approval)
-      - setWeight: 50 # Increase traffic to 50%
-      - pause: {} # Pause indefinitely, waiting for a manual promotion (kubectl argo rollouts promote myservice)
-      - setWeight: 90 # Increase traffic to 90%
-      - pause: {  }
-      - setWeight: 100 # Final traffic shift
+      - setWeight: 10 
+      - pause: {}
+      - setWeight: 50
+      - pause: {} 
+      - setWeight: 90 
+      - pause: {}
+      - setWeight: 100 
