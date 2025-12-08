@@ -39,9 +39,9 @@ spec:
           - templateName: error-rate-check 
           args:
           - name: stable-service
-            value: myservice-stable.default.svc.cluster.local
+            value: myservice-stable
           - name: canary-service
-            value: myservice-canary.default.svc.cluster.local
+            value: myservice-canary
       steps:
       - setWeight: 10 
       - pause: {}
