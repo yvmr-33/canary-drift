@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: myservice
-        image: docker.io/yvmr/v2:latest 
+        image: docker.io/yvmr/v1:latest 
         ports:
         - containerPort: 3000
         env:
@@ -39,9 +39,9 @@ spec:
           - templateName: error-rate-check 
           args:
           - name: stable-service
-            value: my-app-stable-svc.default.svc.cluster.local
+            value: myservice-stable.default.svc.cluster.local
           - name: canary-service
-            value: my-app-canary-svc.default.svc.cluster.local
+            value: myservice-canary.default.svc.cluster.local
       steps:
       - setWeight: 10 
       - pause: {}
