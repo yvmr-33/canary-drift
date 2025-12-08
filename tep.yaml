@@ -15,5 +15,4 @@ spec:
       prometheus:
         address: http://prometheus.istio-system.svc.cluster.local:9090 
         query: |
-            # (sum(rate(istio_requests_total{destination_service_name="{{args.canary-service}}"}[2m]))>0)
             vector(0)
