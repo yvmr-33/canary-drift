@@ -11,6 +11,7 @@ spec:
     metadata:
       labels:
         app: myservice
+        version: "v2.0"
     spec:
       containers:
       - name: myservice
