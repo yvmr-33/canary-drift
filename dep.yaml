@@ -11,11 +11,11 @@ spec:
     metadata:
       labels:
         app: myservice
-        version: "v2.0"
+        version: "latest"
     spec:
       containers:
       - name: myservice
-        image: docker.io/yvmr/v2:v2.0 
+        image: docker.io/yvmr/v2:latest
         ports:
         - containerPort: 3000
         env:
