@@ -11,11 +11,11 @@ spec:
     metadata:
       labels:
         app: myservice
-        version: {{ .Values.image.tag | quote }}
+        version: {{ .Values.image.tag | toString | quote }}
     spec:
       containers:
       - name: myservice
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        image: docker.io/yvmr/v2:v2.0
         ports:
         - containerPort: 3000
         env:
